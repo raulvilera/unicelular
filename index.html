@@ -481,6 +481,9 @@
 </div>
 
 <script>
+    // URL da implantação do Google Apps Script que recebe as respostas.
+    const URL_APPS_SCRIPT = 'https://script.google.com/macros/s/AKfycbw0J46G9iSL90Gxe2EbZNLitmtS0vNE9AoNabgqgJudif2krdtrGMvoXu6zkOSomhet/exec';
+
     // --- DADOS DAS QUESTÕES (Contextualizadas) ---
     const questoes = [
         {
@@ -975,29 +978,37 @@
             totalMultipla: questoes.filter(q => q.tipo === 'multipla').length
         };
 
-        google.script.run
-            .withSuccessHandler(function(response) {
-                if (response.status === 'success') {
-                    feedback.className = 'feedback success';
-                    feedback.textContent = `Respostas enviadas com sucesso! Você acertou ${dadosEnvio.acertos} de ${dadosEnvio.totalMultipla} questões de múltipla escolha.`;
-                    feedback.style.display = 'block';
-                    btnEnviar.textContent = 'Enviado!';
-                } else {
-                    feedback.className = 'feedback error';
-                    feedback.textContent = 'Erro ao enviar: ' + response.message;
-                    feedback.style.display = 'block';
-                    btnEnviar.disabled = false;
-                    btnEnviar.textContent = 'Enviar Respostas';
-                }
-            })
-            .withFailureHandler(function(error) {
-                feedback.className = 'feedback error';
-                feedback.textContent = 'Erro de conexão: ' + error.message;
-                feedback.style.display = 'block';
-                btnEnviar.disabled = false;
-                btnEnviar.textContent = 'Enviar Respostas';
-            })
-            .registrarRespostas(dadosEnvio);
+        // Envia os dados para a implantação publicada do Google Apps Script.
+        fetch(URL_APPS_SCRIPT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+            },
+            body: JSON.stringify(dadosEnvio)
+        })
+        .then(async function(response) {
+            const texto = await response.text();
+            let resultado;
+            try {
+                resultado = JSON.parse(texto);
+            } catch (erro) {
+                resultado = { status: response.ok ? 'success' : 'error', message: texto };
+            }
+            if (!response.ok || resultado.status === 'error') {
+                throw new Error(resultado.message || 'Não foi possível registrar as respostas.');
+            }
+            feedback.className = 'feedback success';
+            feedback.textContent = `Respostas enviadas com sucesso! Você acertou ${dadosEnvio.acertos} de ${dadosEnvio.totalMultipla} questões de múltipla escolha.`;
+            feedback.style.display = 'block';
+            btnEnviar.textContent = 'Enviado!';
+        })
+        .catch(function(error) {
+            feedback.className = 'feedback error';
+            feedback.textContent = 'Erro ao enviar: ' + error.message;
+            feedback.style.display = 'block';
+            btnEnviar.disabled = false;
+            btnEnviar.textContent = 'Enviar Respostas';
+        });
     }
 
     // Inicializa a página
