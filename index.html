@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade de Ciências - 6º Ano - 3º Bimestre</title>
+    <style>
+        /* Reset e Estilos Globais */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #000000 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Cabeçalho */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #1a5276;
+            padding-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            color: #1a5276;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            color: #2e86c1;
+            font-weight: 500;
+        }
+
+        /* Formulário de Identificação */
+        .identificacao {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .identificacao .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .identificacao label {
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 5px;
+            font-size: 0.85em;
+            text-transform: uppercase;
+        }
+
+        .identificacao select, .identificacao input {
+            padding: 10px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: border-color 0.3s;
+            width: 100%;
+        }
+
+        .identificacao select:focus, .identificacao input:focus {
+            border-color: #2e86c1;
+            outline: none;
+        }
+
+        .identificacao input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+            color: #6c757d;
+        }
+
+        /* Larguras específicas para os campos */
+        #email { grid-column: span 2; } 
+        #ra { grid-column: span 1; }
+        #digito { grid-column: span 1; }
+        #chamada { grid-column: span 1; }
+        #data { grid-column: span 1; }
+
+        /* Cards de Questões - Com Sombreamento */
+        .card {
+            background: linear-gradient(145deg, #e0f7fa, #ffffff);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px; /* Aumentado para dar espaço à sombra */
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.8); /* Sombra mais forte */
+            border-left: 6px solid #2e86c1;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.4), -5px -5px 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .card .question-number {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card .question-text {
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        /* Elementos de Contexto (Gráficos, Tabelas, Infográficos) */
+        .contexto-visual {
+            background: #ffffff;
+            border: 1px solid #bdc3c7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .contexto-visual table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        .contexto-visual th, .contexto-visual td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .contexto-visual th {
+            background-color: #2e86c1;
+            color: white;
+        }
+
+        .contexto-visual tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .contexto-visual .infografico {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .contexto-visual .info-item {
+            text-align: center;
+            flex: 1 1 120px;
+            padding: 10px;
+            background: #e8f6f3;
+            border-radius: 8px;
+            border: 1px solid #a3e4d7;
+        }
+
+        .contexto-visual .info-item h4 {
+            color: #1a5276;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .contexto-visual .info-item p {
+            font-size: 0.85em;
+            color: #333;
+            margin: 0;
+        }
+
+        .contexto-visual .grafico-barras {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            padding: 10px 0;
+            border-bottom: 2px solid #333;
+            border-left: 2px solid #333;
+            margin: 20px;
+        }
+
+        .contexto-visual .barra {
+            width: 40px;
+            background-color: #2e86c1;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: height 0.5s;
+        }
+
+        .contexto-visual .barra span {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-size: 0.8em;
+            white-space: nowrap;
+        }
+
+        .contexto-visual .barra .valor {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        /* Imagens 3D das questões */
+        .question-image {
+            display: block;
+            width: 100%;
+            max-width: 760px;
+            height: auto;
+            max-height: 360px;
+            object-fit: contain;
+            margin: 18px auto;
+            border-radius: 12px;
+            border: 1px solid #d6e4ec;
+            box-shadow: 0 5px 14px rgba(26, 82, 118, 0.18);
+            background: #ffffff;
+        }
+
+        /* Alternativas com Alto Relevo */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(145deg, #f0f0f0, #ffffff);
+            border-radius: 10px;
+            border: 1px solid #dcdcdc;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 4px 4px 8px #b8c6db, -4px -4px 8px #ffffff;
+            font-size: 1em;
+            color: #333;
+            user-select: none;
+        }
+
+        .option:hover {
+            background: linear-gradient(145deg, #e0e0e0, #f9f9f9);
+        }
+
+        .option:active {
+            box-shadow: inset 4px 4px 8px #b8c6db, inset -4px -4px 8px #ffffff;
+            transform: scale(0.98);
+        }
+
+        .option.selected {
+            background: #1a5276 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+            box-shadow: inset 6px 6px 12px #0e2f44, inset -6px -6px 12px #266a9e;
+            border-color: #1a5276;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option .letter {
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1em;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        /* Questões Dissertativas */
+        .discursive-answer {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            background: #fdfdfd;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .discursive-answer:focus {
+            border-color: #2e86c1;
+            outline: none;
+            background: #ffffff;
+        }
+
+        /* Botões de Ação */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(145deg, #1a5276, #2e86c1);
+            color: white;
+            box-shadow: 6px 6px 12px #0e2f44, -6px -6px 12px #4a9bd1;
+        }
+
+        .btn-submit:active {
+            box-shadow: inset 6px 6px 12px #0e2f44, inset -6px -6px 12px #4a9bd1;
+            transform: scale(0.98);
+        }
+
+        .btn-submit:disabled {
+            background: #95a5a6;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-delete {
+            background: linear-gradient(145deg, #7b241c, #c0392b);
+            color: white;
+            box-shadow: 6px 6px 12px #4a1812, -6px -6px 12px #e74c3c;
+        }
+
+        .btn-delete:active {
+            box-shadow: inset 6px 6px 12px #4a1812, inset -6px -6px 12px #e74c3c;
+            transform: scale(0.98);
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .feedback.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Responsividade */
+        @media (max-width: 700px) {
+            .container { padding: 15px; }
+            .header h1 { font-size: 1.4em; }
+            .card { padding: 15px; }
+            .option { padding: 12px 15px; font-size: 0.95em; }
+            .identificacao { grid-template-columns: 1fr; }
+            #email { grid-column: span 1; }
+            .action-buttons { flex-direction: column; }
+            .contexto-visual .grafico-barras { height: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>E.E. PROFª WANDA MASCAGNI DE SÁ</h1>
+        <h2>Atividade de Ciências - 6º Ano - 3º Bimestre</h2>
+    </div>
+
+    <!-- Formulário de Identificação -->
+    <div class="identificacao">
+        <div class="form-group">
+            <label for="turma">Turma:</label>
+            <select id="turma" onchange="carregarAlunos()">
+                <option value="">Selecione a Turma</option>
+                <option value="6ºAno A">6ºAno A</option>
+                <option value="6ºAno C">6ºAno C</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="aluno">Nome do Aluno:</label>
+            <select id="aluno" onchange="preencherDadosAluno()" disabled>
+                <option value="">Selecione a Turma primeiro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="chamada">Nº de Chamada:</label>
+            <input type="text" id="chamada" readonly placeholder="Nº">
+        </div>
+        <div class="form-group">
+            <label for="ra">RA:</label>
+            <input type="text" id="ra" readonly placeholder="RA">
+        </div>
+        <div class="form-group">
+            <label for="digito">Dígito:</label>
+            <input type="text" id="digito" readonly placeholder="Díg.">
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail Institucional:</label>
+            <input type="text" id="email" readonly placeholder="E-mail">
+        </div>
+        <div class="form-group">
+            <label for="data">Data:</label>
+            <input type="text" id="data" readonly>
+        </div>
+    </div>
+
+    <form id="formAtividade" onsubmit="enviarRespostas(event)">
+        <!-- Questões -->
+        <div id="questoes-container">
+            <!-- As questões serão injetadas via JavaScript -->
+        </div>
+
+        <div class="action-buttons">
+            <button type="submit" class="btn btn-submit" id="btnEnviar" disabled>Enviar Respostas</button>
+            <button type="button" class="btn btn-delete" id="btnExcluir" onclick="excluirRespostas()">Excluir Respostas</button>
+        </div>
+    </form>
+
+    <div id="feedback" class="feedback"></div>
+</div>
+
+<script>
+    // --- DADOS DAS QUESTÕES (Contextualizadas) ---
+    const questoes = [
+        {
+            id: 1,
+            tipo: 'multipla',
+            enunciado: 'A aula 1 do 3º bimestre aborda a Teoria Celular. O infográfico abaixo compara a organização de dois tipos de células. Com base na análise das imagens e de seus conhecimentos, qual das alternativas descreve corretamente a diferença entre células procariontes e eucariontes?',
+            contexto: `
+                <div class="infografico">
+                    <div class="info-item">
+                        <h4>Célula Procarionte</h4>
+                        <p>Material genético disperso no citoplasma.</p>
+                        <p><strong>Sem núcleo organizado.</strong></p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Célula Eucarionte</h4>
+                        <p>Material genético envolto por membrana nuclear.</p>
+                        <p><strong>Com núcleo organizado.</strong></p>
+                    </div>
+                </div>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'Células procariontes possuem núcleo organizado, enquanto eucariontes não possuem.' },
+                { letra: 'B', texto: 'Células eucariontes possuem núcleo delimitado por membrana, enquanto procariontes não possuem núcleo organizado.' },
+                { letra: 'C', texto: 'Ambas possuem núcleo, mas as procariontes são menores.' },
+                { letra: 'D', texto: 'Células procariontes são encontradas apenas em fungos e eucariontes em bactérias.' }
+            ],
+            correta: 'B',
+            imagem: 'assets/questao-01-celulas-3d.png'
+
+        },
+        {
+            id: 2,
+            tipo: 'multipla',
+            enunciado: 'Na aula 2, estudamos o desenvolvimento da microscopia. A tabela abaixo mostra alguns marcos históricos. Qual foi a principal contribuição do microscópio para o avanço do conhecimento sobre as células?',
+            contexto: `
+                <table>
+                    <tr><th>Ano</th><th>Marco Histórico</th></tr>
+                    <tr><td>1665</td><td>Robert Hooke observa células em cortiça.</td></tr>
+                    <tr><td>1674</td><td>Anton van Leeuwenhoek observa microrganismos.</td></tr>
+                    <tr><td>1839</td><td>Schleiden e Schwann formulam a Teoria Celular.</td></tr>
+                </table>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'Permitiu a observação de átomos e moléculas.' },
+                { letra: 'B', texto: 'Possibilitou a descoberta de que todos os seres vivos são formados por células.' },
+                { letra: 'C', texto: 'Foi fundamental para a criação da teoria da evolução.' },
+                { letra: 'D', texto: 'Ajudou a identificar a composição química do DNA.' }
+            ],
+            correta: 'B',
+            imagem: 'assets/questao-02-microscopio-3d.png'
+
+        },
+        {
+            id: 3,
+            tipo: 'multipla',
+            enunciado: 'Conforme a aula 3, sobre a introdução à estrutura celular, o gráfico abaixo mostra a composição percentual de uma célula eucarionte. Quais são os três componentes básicos de uma célula eucarionte?',
+            contexto: `
+                <div class="grafico-barras">
+                    <div class="barra" style="height: 60%; background-color: #2e86c1;"><span class="valor">60%</span><span>Membrana</span></div>
+                    <div class="barra" style="height: 30%; background-color: #1a5276;"><span class="valor">30%</span><span>Citoplasma</span></div>
+                    <div class="barra" style="height: 10%; background-color: #154360;"><span class="valor">10%</span><span>Núcleo</span></div>
+                </div>
+                <p style="text-align: center; font-size: 0.8em; color: #666;">*Valores ilustrativos para representar a presença dos componentes.</p>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'Parede celular, cloroplastos e vacúolos.' },
+                { letra: 'B', texto: 'Membrana plasmática, citoplasma e núcleo.' },
+                { letra: 'C', texto: 'Ribossomos, mitocôndrias e lisossomos.' },
+                { letra: 'D', texto: 'Flagelos, cílios e centríolos.' }
+            ],
+            correta: 'B',
+            imagem: 'assets/questao-03-celula-eucarionte-3d.png'
+
+        },
+        {
+            id: 4,
+            tipo: 'multipla',
+            enunciado: 'Na aula 4, diferenciamos seres eucariontes e procariontes. A tabela compara características de dois organismos. Com base nela, as bactérias são exemplos de seres:',
+            contexto: `
+                <table>
+                    <tr><th>Característica</th><th>Organismo X</th><th>Organismo Y</th></tr>
+                    <tr><td>Núcleo</td><td>Ausente</td><td>Presente</td></tr>
+                    <tr><td>Organelas membranosas</td><td>Ausentes</td><td>Presentes</td></tr>
+                    <tr><td>Tamanho</td><td>1-5 µm</td><td>10-100 µm</td></tr>
+                    <tr><td>Exemplo</td><td>Bactéria</td><td>Protozoário</td></tr>
+                </table>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'Eucariontes, pois possuem núcleo.' },
+                { letra: 'B', texto: 'Procariontes, pois não possuem núcleo organizado.' },
+                { letra: 'C', texto: 'Eucariontes, pois são pluricelulares.' },
+                { letra: 'D', texto: 'Procariontes, mas possuem organelas membranosas.' }
+            ],
+            correta: 'B',
+            imagem: 'assets/questao-04-bacteria-3d.png'
+
+        },
+        {
+            id: 5,
+            tipo: 'multipla',
+            enunciado: 'Na aula 5, sobre a célula animal, o infográfico abaixo destaca uma organela específica. Qual organela é responsável pela produção de energia (respiração celular)?',
+            contexto: `
+                <div class="infografico">
+                    <div class="info-item" style="background: #fadbd8; border-color: #e74c3c;">
+                        <h4>Organela em Destaque</h4>
+                        <p>Possui dupla membrana, sendo a interna pregueada (cristas).</p>
+                        <p>Responsável pela <strong>respiração celular</strong> e produção de ATP.</p>
+                    </div>
+                </div>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'Lisossomo' },
+                { letra: 'B', texto: 'Complexo de Golgi' },
+                { letra: 'C', texto: 'Mitocôndria' },
+                { letra: 'D', texto: 'Retículo endoplasmático' }
+            ],
+            correta: 'C',
+            imagem: 'assets/questao-05-mitocondria-3d.png'
+
+        },
+        {
+            id: 6,
+            tipo: 'multipla',
+            enunciado: 'Na aula 6, sobre a célula vegetal, a tabela compara duas organelas. Qual estrutura está presente apenas na célula vegetal e é responsável pela fotossíntese?',
+            contexto: `
+                <table>
+                    <tr><th>Organela</th><th>Função Principal</th><th>Presente em</th></tr>
+                    <tr><td>Mitocôndria</td><td>Respiração celular</td><td>Animal e Vegetal</td></tr>
+                    <tr><td>Cloroplasto</td><td>Fotossíntese</td><td>Apenas Vegetal</td></tr>
+                </table>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'Mitocôndria' },
+                { letra: 'B', texto: 'Cloroplasto' },
+                { letra: 'C', texto: 'Ribossomo' },
+                { letra: 'D', texto: 'Núcleo' }
+            ],
+            correta: 'B',
+            imagem: 'assets/questao-06-cloroplasto-3d.png'
+
+        },
+        {
+            id: 7,
+            tipo: 'multipla',
+            enunciado: 'Na aula 9, estudamos as bactérias. O gráfico abaixo mostra a classificação das bactérias quanto à forma. Qual das alternativas abaixo apresenta uma característica correta desses organismos?',
+            contexto: `
+                <div class="grafico-barras">
+                    <div class="barra" style="height: 40%; background-color: #2e86c1;"><span class="valor">Cocos</span><span>Esféricas</span></div>
+                    <div class="barra" style="height: 60%; background-color: #1a5276;"><span class="valor">Bacilos</span><span>Bastonetes</span></div>
+                    <div class="barra" style="height: 30%; background-color: #154360;"><span class="valor">Espirilos</span><span>Espirais</span></div>
+                </div>
+            `,
+            alternativas: [
+                { letra: 'A', texto: 'São organismos eucariontes e pluricelulares.' },
+                { letra: 'B', texto: 'São organismos procariontes e unicelulares.' },
+                { letra: 'C', texto: 'São organismos eucariontes e unicelulares.' },
+                { letra: 'D', texto: 'São organismos procariontes e pluricelulares.' }
+            ],
+            correta: 'B',
+            imagem: 'assets/questao-07-formas-bacterias-3d.png'
+
+        },
+        {
+            id: 8,
+            tipo: 'dissertativa',
+            enunciado: 'Na aula 10, estudamos os fungos. A imagem abaixo mostra a estrutura de um fungo. Explique qual é a importância ecológica dos fungos nos ecossistemas e dê um exemplo de sua utilização na sociedade.',
+            imagem: 'assets/questao-08-fungo-3d.png'
+        },
+        {
+            id: 9,
+            tipo: 'dissertativa',
+            enunciado: 'Na aula 11, aprendemos sobre os protozoários. A tabela abaixo lista algumas doenças. Descreva o que são os protozoários, citando uma doença causada por eles e sua forma de transmissão.',
+            contexto: `
+                <table>
+                    <tr><th>Doença</th><th>Agente Causador</th><th>Forma de Transmissão</th></tr>
+                    <tr><td>Malária</td><td>Plasmodium</td><td>Picada do mosquito Anopheles</td></tr>
+                    <tr><td>Doença de Chagas</td><td>Trypanosoma cruzi</td><td>Picada do barbeiro</td></tr>
+                    <tr><td>Giardíase</td><td>Giardia lamblia</td><td>Água e alimentos contaminados</td></tr>
+                </table>
+            `,
+            imagem: 'assets/questao-09-protozoarios-3d.png'
+        },
+        {
+            id: 10,
+            tipo: 'dissertativa',
+            enunciado: 'Na aula 14, discutimos o saneamento básico e a saúde. O gráfico abaixo relaciona a cobertura de saneamento com a incidência de doenças. Explique a relação entre a falta de saneamento básico e a disseminação de doenças causadas por vírus e bactérias.',
+            contexto: `
+                <div class="grafico-barras">
+                    <div class="barra" style="height: 80%; background-color: #c0392b;"><span class="valor">80%</span><span>Sem Saneamento</span></div>
+                    <div class="barra" style="height: 20%; background-color: #2e86c1;"><span class="valor">20%</span><span>Com Saneamento</span></div>
+                </div>
+                <p style="text-align: center; font-size: 0.8em; color: #666;">*Incidência relativa de doenças de veiculação hídrica.</p>
+            `,
+            imagem: 'assets/questao-10-saneamento-3d.png'
+        }
+    ];
+
+    // --- DADOS DOS ALUNOS (Atualizados conforme novos arquivos) ---
+    const alunosData = {
+        "6ºAno A": [
+            { chamada: 1, nome: "ALÍCIA DE SOUZA SIQUEIRA", ra: "000125482995", digito: "7", email: "00001254829957sp@al.educacao.sp.gov.br" },
+            { chamada: 3, nome: "AMANDA SALDANHA CAVALCANTE", ra: "000116498893", digito: "1", email: "00001164988931SP@al.educacao.sp.gov.br" },
+            { chamada: 4, nome: "ANA BÁRBARA SAÚGO DE OLIVEIRA", ra: "000122358848", digito: "8", email: "00001223588488sp@al.educacao.sp.gov.br" },
+            { chamada: 5, nome: "DANIEL DA SILVA TAVARES", ra: "000121488509", digito: "3", email: "00001214885093sp@al.educacao.sp.gov.br" },
+            { chamada: 7, nome: "ISABELY SHIBASAKI FERREIRA", ra: "000116506026", digito: "7", email: "00001165060267sp@al.educacao.sp.gov.br" },
+            { chamada: 10, nome: "JOÃO INÁCIO DO NASCIMENTO RODRIGUES", ra: "000121942028", digito: "1", email: "00001219420281SP@al.educacao.sp.gov.br" },
+            { chamada: 11, nome: "JOAO PIERRE DA SILVA", ra: "000116526142", digito: "X", email: "0000116526142XSP@al.educacao.sp.gov.br" },
+            { chamada: 12, nome: "JULLIA VITORIA ALAMBERT GOMES", ra: "000121190776", digito: "4", email: "00001211907764sp@al.educacao.sp.gov.br" },
+            { chamada: 13, nome: "KAMRAN RASEKH", ra: "000124596353", digito: "3", email: "00001245963533sp@al.educacao.sp.gov.br" },
+            { chamada: 14, nome: "KAYQUE VINICIOS DA SILVA", ra: "000116527229", digito: "5", email: "00001165272295SP@al.educacao.sp.gov.br" },
+            { chamada: 15, nome: "LORENA EMMELINE MENDES LEFEVRE", ra: "000121621732", digito: "4", email: "00001216217324sp@al.educacao.sp.gov.br" },
+            { chamada: 16, nome: "LUAN HENRIQUE DE ALMEIDA TAVARES", ra: "000123690066", digito: "2", email: "00001236900662sp@al.educacao.sp.gov.br" },
+            { chamada: 18, nome: "MURILLO CARVALHO SALES", ra: "000121486350", digito: "4", email: "00001214863504sp@al.educacao.sp.gov.br" },
+            { chamada: 19, nome: "NICOLY FERREIRA GONCALVES", ra: "000123924088", digito: "0", email: "00001239240880sp@al.educacao.sp.gov.br" },
+            { chamada: 21, nome: "SARAH CAVALCANTE CANDIDO DA SILVA", ra: "000116764243", digito: "0", email: "00001167642430sp@al.educacao.sp.gov.br" },
+            { chamada: 22, nome: "SOFIA SOARES DE OLIVEIRA", ra: "000122965630", digito: "3", email: "00001229656303SP@al.educacao.sp.gov.br" },
+            { chamada: 23, nome: "VINICÍUS ARTHUR ALVES DA SILVA", ra: "000121479898", digito: "6", email: "00001214798986sp@al.educacao.sp.gov.br" },
+            { chamada: 24, nome: "WALLISON LEONARDO DE JESUS LESSA", ra: "000115891648", digito: "6", email: "00001158916486sp@al.educacao.sp.gov.br" },
+            { chamada: 27, nome: "EDUARDO ANTONIO LAMBERT GONÇALVES", ra: "000125489065", digito: "8", email: "00001254890658sp@al.educacao.sp.gov.br" },
+            { chamada: 28, nome: "FERNANDA MEDEIROS FANTINI", ra: "000116503850", digito: "X", email: "0000116503850XSP@al.educacao.sp.gov.br" },
+            { chamada: 29, nome: "JOAO PIETRO ROCHA OLIVEIRA", ra: "000124983876", digito: "9", email: "00001249838769sp@al.educacao.sp.gov.br" },
+            { chamada: 32, nome: "JOÃO VICTOR FERNANDES MORAES", ra: "000114454947", digito: "4", email: "00001144549474SP@al.educacao.sp.gov.br" },
+            { chamada: 33, nome: "LEONARDO FURINI FERNANDES JUNIOR", ra: "000115885233", digito: "2", email: "00001158852332SP@al.educacao.sp.gov.br" },
+            { chamada: 34, nome: "ALESSANDRA SALGADO DA SILVA", ra: "000116498435", digito: "4", email: "00001164984354SP@al.educacao.sp.gov.br" },
+            { chamada: 35, nome: "ROBERT LUCAS MARTINS FERREIRA", ra: "000116520583", digito: "X", email: "0000116520583XSP@al.educacao.sp.gov.br" },
+            { chamada: 36, nome: "ALICIA SALGADO DA SILVA", ra: "000116498756", digito: "2", email: "00001164987562SP@al.educacao.sp.gov.br" },
+            { chamada: 37, nome: "ALICE CANALLE MAGALHÃES", ra: "000121482871", digito: "1", email: "00001214828711SP@al.educacao.sp.gov.br" },
+            { chamada: 38, nome: "NAOMI PAGES ROJO", ra: "000126699066", digito: "5", email: "00001266990665sp@al.educacao.sp.gov.br" }
+        ],
+        "6ºAno C": [
+            { chamada: 1, nome: "AGATHA RODRIGUES MIRANDA", ra: "000121488538", digito: "X", email: "0000121488538xsp@al.educacao.sp.gov.br" },
+            { chamada: 3, nome: "ANA LETÍCIA MARTINS DA SILVA", ra: "000121494077", digito: "8", email: "00001214940778SP@al.educacao.sp.gov.br" },
+            { chamada: 4, nome: "ARTHUR DEIVID DA SILVA FARIAS", ra: "000121487001", digito: "6", email: "00001214870016sp@al.educacao.sp.gov.br" },
+            { chamada: 5, nome: "CLARA JAZMIN URDAPILLETA GONZALEZ", ra: "000122151652", digito: "8", email: "00001221516528SP@al.educacao.sp.gov.br" },
+            { chamada: 7, nome: "EMILY COSTA PEREIRA", ra: "000115507107", digito: "4", email: "00001155071074sp@al.educacao.sp.gov.br" },
+            { chamada: 8, nome: "FELIPE BARROS DE FREITAS", ra: "000115879405", digito: "8", email: "00001158794058sp@al.educacao.sp.gov.br" },
+            { chamada: 9, nome: "HELOISA NEVES DA SILVA", ra: "000115078739", digito: "9", email: "00001150787399SP@al.educacao.sp.gov.br" },
+            { chamada: 10, nome: "ISABELA SEVERA RAULINO", ra: "000115881194", digito: "9", email: "00001158811949sp@al.educacao.sp.gov.br" },
+            { chamada: 12, nome: "JOAO VITOR BARBOSA PONTES", ra: "000115882734", digito: "9", email: "00001158827349SP@al.educacao.sp.gov.br" },
+            { chamada: 14, nome: "LAURAH APARECIDA CANDIDO DE OLIVEIRA", ra: "000121621617", digito: "4", email: "00001216216174SP@al.educacao.sp.gov.br" },
+            { chamada: 15, nome: "MATHEUS DUARTE DA SILVA", ra: "000121487460", digito: "5", email: "00001214874605SP@al.educacao.sp.gov.br" },
+            { chamada: 17, nome: "ROSA MARIA OLIVEIRA ALMEIDA", ra: "000121493517", digito: "5", email: "00001214935175SP@al.educacao.sp.gov.br" },
+            { chamada: 18, nome: "SARAH LIVIA NUNES NASCIMENTO", ra: "000122976724", digito: "1", email: "00001229767241sp@al.educacao.sp.gov.br" },
+            { chamada: 19, nome: "TALITA VITORIA VIEIRA NUNES", ra: "000122357909", digito: "8", email: "00001223579098sp@al.educacao.sp.gov.br" },
+            { chamada: 20, nome: "VICTOR EDUARDO DOS SANTOS", ra: "000115891304", digito: "7", email: "00001158913047sp@al.educacao.sp.gov.br" },
+            { chamada: 21, nome: "VITOR HUGO BRAZ GOMES", ra: "000116468352", digito: "4", email: "00001164683524SP@al.educacao.sp.gov.br" },
+            { chamada: 22, nome: "LORENNA ANDRADE DE OLIVEIRA", ra: "000116528484", digito: "4", email: "00001165284844SP@al.educacao.sp.gov.br" },
+            { chamada: 23, nome: "MARIA EDUARDA ARAUJO GARRIDO", ra: "000125480581", digito: "3", email: "00001254805813sp@al.educacao.sp.gov.br" },
+            { chamada: 24, nome: "RAISSA MATHIAS ANDRADE", ra: "000121477489", digito: "1", email: "00001214774891sp@al.educacao.sp.gov.br" },
+            { chamada: 25, nome: "UELITON VIEIRA DA SILVA", ra: "000121490087", digito: "2", email: "" },
+            { chamada: 26, nome: "VALENTINA DOS SANTOS CORREA", ra: "000115844738", digito: "3", email: "00001158447383SP@al.educacao.sp.gov.br" },
+            { chamada: 27, nome: "MARIA VITORIA ALMEIDA SANTOS", ra: "000122357970", digito: "0", email: "" },
+            { chamada: 28, nome: "CATARYNA DOS SANTOS", ra: "000121484716", digito: "X", email: "0000121484716xsp@al.educacao.sp.gov.br" },
+            { chamada: 29, nome: "ANA CLARA CORREA PINTO", ra: "000116499044", digito: "5", email: "00001164990445sp@al.educacao.sp.gov.br" },
+            { chamada: 31, nome: "GUSTAVO HENRIQUE SANTOS MALAQUIAS", ra: "000115880504", digito: "4", email: "00001158805044sp@al.educacao.sp.gov.br" },
+            { chamada: 32, nome: "SOFFIA NICOLY ALVES FIDELES", ra: "000115890524", digito: "5", email: "00001158905245SP@al.educacao.sp.gov.br" },
+            { chamada: 33, nome: "DAYLLA CRISTINE RODRIGUES DOS SANTOS VIEIRA", ra: "000115985440", digito: "3", email: "00001159854403sp@al.educacao.sp.gov.br" }
+        ]
+    };
+
+    // --- LÓGICA DE CARREGAMENTO ---
+    function carregarAlunos() {
+        const turma = document.getElementById('turma').value;
+        const selectAluno = document.getElementById('aluno');
+        const inputRa = document.getElementById('ra');
+        const inputDigito = document.getElementById('digito');
+        const inputEmail = document.getElementById('email');
+        const inputChamada = document.getElementById('chamada');
+        const inputData = document.getElementById('data');
+        const btnEnviar = document.getElementById('btnEnviar');
+
+        // Limpa os campos
+        selectAluno.innerHTML = '<option value="">Selecione o Aluno</option>';
+        inputRa.value = '';
+        inputDigito.value = '';
+        inputEmail.value = '';
+        inputChamada.value = '';
+        inputData.value = '';
+        btnEnviar.disabled = true;
+
+        if (turma && alunosData[turma]) {
+            selectAluno.disabled = false;
+            // Ordena os alunos pelo número de chamada
+            const alunosOrdenados = alunosData[turma].sort((a, b) => a.chamada - b.chamada);
+            alunosOrdenados.forEach(aluno => {
+                const option = document.createElement('option');
+                option.value = aluno.ra; // Usa RA como valor único
+                option.textContent = aluno.nome;
+                option.dataset.chamada = aluno.chamada;
+                option.dataset.digito = aluno.digito;
+                option.dataset.email = aluno.email;
+                selectAluno.appendChild(option);
+            });
+        } else {
+            selectAluno.disabled = true;
+            selectAluno.innerHTML = '<option value="">Selecione a Turma primeiro</option>';
+        }
+    }
+
+    function preencherDadosAluno() {
+        const alunoSelect = document.getElementById('aluno');
+        const inputRa = document.getElementById('ra');
+        const inputDigito = document.getElementById('digito');
+        const inputEmail = document.getElementById('email');
+        const inputChamada = document.getElementById('chamada');
+        const inputData = document.getElementById('data');
+        const btnEnviar = document.getElementById('btnEnviar');
+        
+        const selectedOption = alunoSelect.options[alunoSelect.selectedIndex];
+
+        if (selectedOption.value) {
+            inputRa.value = selectedOption.value;
+            inputDigito.value = selectedOption.dataset.digito || '';
+            inputEmail.value = selectedOption.dataset.email || '';
+            inputChamada.value = selectedOption.dataset.chamada || '';
+            
+            // Preenche a data atual
+            const hoje = new Date();
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const ano = hoje.getFullYear();
+            inputData.value = `${dia}/${mes}/${ano}`;
+
+            btnEnviar.disabled = false;
+        } else {
+            inputRa.value = '';
+            inputDigito.value = '';
+            inputEmail.value = '';
+            inputChamada.value = '';
+            inputData.value = '';
+            btnEnviar.disabled = true;
+        }
+    }
+
+    // --- RENDERIZAÇÃO DAS QUESTÕES ---
+    function renderizarQuestoes() {
+        const container = document.getElementById('questoes-container');
+        let html = '';
+
+        questoes.forEach((q, index) => {
+            html += `<div class="card" id="card-${q.id}">`;
+            html += `<span class="question-number">Questão ${index + 1}</span>`;
+            html += `<p class="question-text">${q.enunciado}</p>`;
+
+            // A imagem 3D fica imediatamente após o enunciado e antes das alternativas/resposta.
+            if (q.imagem) {
+                html += `<img src="${q.imagem}" alt="Ilustração 3D da Questão ${index + 1}" class="question-image" loading="lazy">`;
+            }
+
+            // Adiciona o contexto visual (tabela, gráfico, infográfico), quando houver.
+            if (q.contexto) {
+                html += `<div class="contexto-visual">${q.contexto}</div>`;
+            }
+
+            if (q.tipo === 'multipla') {
+                html += `<div class="options" id="options-${q.id}">`;
+                q.alternativas.forEach(alt => {
+                    html += `
+                        <div class="option" onclick="selecionarAlternativa(${q.id}, '${alt.letra}')" id="opt-${q.id}-${alt.letra}">
+                            <span class="letter">${alt.letra})</span>
+                            <span>${alt.texto}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                html += `<input type="hidden" id="resposta-${q.id}" value="">`;
+            } else {
+                html += `<textarea class="discursive-answer" id="resposta-${q.id}" placeholder="Digite sua resposta aqui..."></textarea>`;
+            }
+
+            html += `</div>`;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // --- SELEÇÃO DE ALTERNATIVA ---
+    function selecionarAlternativa(questaoId, letra) {
+        const optionsContainer = document.getElementById(`options-${questaoId}`);
+        const options = optionsContainer.querySelectorAll('.option');
+        options.forEach(opt => {
+            opt.classList.remove('selected');
+        });
+
+        const selectedOption = document.getElementById(`opt-${questaoId}-${letra}`);
+        selectedOption.classList.add('selected');
+
+        document.getElementById(`resposta-${questaoId}`).value = letra;
+    }
+
+    // --- EXCLUIR RESPOSTAS ---
+    function excluirRespostas() {
+        if (confirm('Tem certeza que deseja excluir todas as suas respostas? Esta ação não pode ser desfeita.')) {
+            // Limpa os campos de identificação
+            document.getElementById('turma').value = '';
+            document.getElementById('aluno').innerHTML = '<option value="">Selecione a Turma primeiro</option>';
+            document.getElementById('aluno').disabled = true;
+            document.getElementById('ra').value = '';
+            document.getElementById('digito').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('chamada').value = '';
+            document.getElementById('data').value = '';
+            
+            // Limpa as respostas das questões
+            questoes.forEach(q => {
+                if (q.tipo === 'multipla') {
+                    const optionsContainer = document.getElementById(`options-${q.id}`);
+                    if (optionsContainer) {
+                        const options = optionsContainer.querySelectorAll('.option');
+                        options.forEach(opt => opt.classList.remove('selected'));
+                    }
+                    const hiddenInput = document.getElementById(`resposta-${q.id}`);
+                    if (hiddenInput) hiddenInput.value = '';
+                } else {
+                    const textarea = document.getElementById(`resposta-${q.id}`);
+                    if (textarea) textarea.value = '';
+                }
+            });
+
+            // Desabilita o botão de enviar
+            document.getElementById('btnEnviar').disabled = true;
+            
+            // Limpa o feedback
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'none';
+            feedback.textContent = '';
+            
+            alert('Respostas excluídas com sucesso!');
+        }
+    }
+
+    // --- ENVIO DE RESPOSTAS ---
+    function enviarRespostas(e) {
+        e.preventDefault();
+
+        const turma = document.getElementById('turma').value;
+        const alunoSelect = document.getElementById('aluno');
+        const nomeAluno = alunoSelect.options[alunoSelect.selectedIndex].text;
+        const ra = document.getElementById('ra').value;
+        const digito = document.getElementById('digito').value;
+        const email = document.getElementById('email').value;
+        const chamada = document.getElementById('chamada').value;
+        const data = document.getElementById('data').value;
+        const btnEnviar = document.getElementById('btnEnviar');
+        const feedback = document.getElementById('feedback');
+
+        if (!turma || !ra || !nomeAluno) {
+            feedback.className = 'feedback error';
+            feedback.textContent = 'Por favor, selecione a turma e o aluno corretamente.';
+            feedback.style.display = 'block';
+            return;
+        }
+
+        const respostas = {};
+        let todasRespondidas = true;
+
+        questoes.forEach(q => {
+            let resposta = '';
+            if (q.tipo === 'multipla') {
+                resposta = document.getElementById(`resposta-${q.id}`).value;
+            } else {
+                resposta = document.getElementById(`resposta-${q.id}`).value.trim();
+            }
+
+            if (!resposta) {
+                todasRespondidas = false;
+            }
+            respostas[`q${q.id}`] = resposta;
+        });
+
+        if (!todasRespondidas) {
+            feedback.className = 'feedback error';
+            feedback.textContent = 'Por favor, responda todas as questões antes de enviar.';
+            feedback.style.display = 'block';
+            return;
+        }
+
+        btnEnviar.disabled = true;
+        btnEnviar.textContent = 'Enviando...';
+        feedback.style.display = 'none';
+
+        const dadosEnvio = {
+            turma: turma,
+            nome: nomeAluno,
+            ra: ra,
+            digito: digito,
+            email: email,
+            chamada: chamada,
+            data: data,
+            respostas: respostas,
+            acertos: questoes.filter(q => q.tipo === 'multipla' && respostas[`q${q.id}`] === q.correta).length,
+            totalMultipla: questoes.filter(q => q.tipo === 'multipla').length
+        };
+
+        google.script.run
+            .withSuccessHandler(function(response) {
+                if (response.status === 'success') {
+                    feedback.className = 'feedback success';
+                    feedback.textContent = `Respostas enviadas com sucesso! Você acertou ${dadosEnvio.acertos} de ${dadosEnvio.totalMultipla} questões de múltipla escolha.`;
+                    feedback.style.display = 'block';
+                    btnEnviar.textContent = 'Enviado!';
+                } else {
+                    feedback.className = 'feedback error';
+                    feedback.textContent = 'Erro ao enviar: ' + response.message;
+                    feedback.style.display = 'block';
+                    btnEnviar.disabled = false;
+                    btnEnviar.textContent = 'Enviar Respostas';
+                }
+            })
+            .withFailureHandler(function(error) {
+                feedback.className = 'feedback error';
+                feedback.textContent = 'Erro de conexão: ' + error.message;
+                feedback.style.display = 'block';
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = 'Enviar Respostas';
+            })
+            .registrarRespostas(dadosEnvio);
+    }
+
+    // Inicializa a página
+    window.onload = function() {
+        renderizarQuestoes();
+    };
+
+</script>
+
+</body>
+</html>
