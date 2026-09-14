@@ -39,6 +39,34 @@ function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+/**
+ * Recebe respostas quando o HTML é aberto fora do Apps Script e usa fetch POST.
+ * O corpo esperado é um JSON com turma, nome, ra e respostas.q1...q10.
+ */
+function doPost(e) {
+  try {
+    if (!e || !e.postData || !e.postData.contents) {
+      return respostaJson_({ status: 'error', message: 'Corpo POST vazio.' });
+    }
+
+    const dados = JSON.parse(e.postData.contents);
+    const resultado = registrarRespostas(dados);
+    return respostaJson_(resultado);
+  } catch (erro) {
+    console.error(erro);
+    return respostaJson_({
+      status: 'error',
+      message: erro.message || String(erro)
+    });
+  }
+}
+
+function respostaJson_(objeto) {
+  return ContentService
+    .createTextOutput(JSON.stringify(objeto))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 /** Executar uma vez manualmente para criar as abas e o gabarito. */
 function configurarPlanilha() {
   const planilha = SpreadsheetApp.openById(PLANILHA_ID);
@@ -47,7 +75,7 @@ function configurarPlanilha() {
   return 'Abas criadas e configuradas com sucesso.';
 }
 
-/** Recebe o objeto enviado pelo formulário por google.script.run. */
+/** Recebe o objeto enviado pelo formulário por google.script.run ou doPost. */
 function registrarRespostas(dados) {
   if (!dados || !dados.turma || !dados.nome || !dados.ra) {
     return { status: 'error', message: 'Dados de identificação incompletos.' };
@@ -60,6 +88,9 @@ function registrarRespostas(dados) {
   bloqueio.waitLock(30000);
   try {
     const planilha = SpreadsheetApp.openById(PLANILHA_ID);
+    // Garante as duas abas mesmo que configurarPlanilha ainda não tenha sido executada.
+    TURMAS.forEach(turma => prepararAbaTurma_(planilha, turma));
+    prepararAbaGabarito_(planilha);
     const aba = prepararAbaTurma_(planilha, dados.turma);
     const respostas = dados.respostas || {};
     const linha = construirLinha_(dados, respostas);

@@ -481,7 +481,7 @@
 </div>
 
 <script>
-    // URL da implantação do Google Apps Script que recebe as respostas.
+    // Implantação pública que recebe as respostas via doPost(e).
     const URL_APPS_SCRIPT = 'https://script.google.com/macros/s/AKfycbw0J46G9iSL90Gxe2EbZNLitmtS0vNE9AoNabgqgJudif2krdtrGMvoXu6zkOSomhet/exec';
 
     // --- DADOS DAS QUESTÕES (Contextualizadas) ---
@@ -978,12 +978,10 @@
             totalMultipla: questoes.filter(q => q.tipo === 'multipla').length
         };
 
-        // Envia os dados para a implantação publicada do Google Apps Script.
+        // O Content-Type text/plain evita o preflight CORS no Web App do Apps Script.
         fetch(URL_APPS_SCRIPT, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8'
-            },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(dadosEnvio)
         })
         .then(async function(response) {
@@ -992,13 +990,13 @@
             try {
                 resultado = JSON.parse(texto);
             } catch (erro) {
-                resultado = { status: response.ok ? 'success' : 'error', message: texto };
+                throw new Error('Resposta inválida do Apps Script: ' + texto.slice(0, 160));
             }
-            if (!response.ok || resultado.status === 'error') {
-                throw new Error(resultado.message || 'Não foi possível registrar as respostas.');
+            if (!response.ok || resultado.status !== 'success') {
+                throw new Error(resultado.message || 'O Apps Script recusou o registro.');
             }
             feedback.className = 'feedback success';
-            feedback.textContent = `Respostas enviadas com sucesso! Você acertou ${dadosEnvio.acertos} de ${dadosEnvio.totalMultipla} questões de múltipla escolha.`;
+            feedback.textContent = `Respostas enviadas com sucesso! Você acertou ${resultado.acertos} de ${resultado.totalMultipla} questões de múltipla escolha.`;
             feedback.style.display = 'block';
             btnEnviar.textContent = 'Enviado!';
         })
